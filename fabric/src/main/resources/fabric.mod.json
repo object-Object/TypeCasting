@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "typecasting",
+  "version": "${version}",
+  "name": "TypeCasting",
+  "description": "Hex Casting addon for advanced computation.",
+  "authors": [
+    "object-Object"
+  ],
+  "contact": {
+    "homepage": "https://typecasting.hexxy.media",
+    "sources": "https://github.com/object-Object/TypeCasting"
+  },
+  "license": "MIT",
+  "icon": "assets/typecasting/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [{
+      "adapter": "kotlin",
+      "value": "gay.object.typecasting.fabric.FabricTypeCasting"
+    }],
+    "client": [{
+      "adapter": "kotlin",
+      "value": "gay.object.typecasting.fabric.FabricTypeCastingClient"
+    }],
+    "server": [{
+      "adapter": "kotlin",
+      "value": "gay.object.typecasting.fabric.FabricTypeCastingServer"
+    }],
+    "fabric-datagen": [{
+      "adapter": "kotlin",
+      "value": "gay.object.typecasting.fabric.datagen.FabricTypeCastingDatagen"
+    }],
+    "modmenu": [{
+      "adapter": "kotlin",
+      "value": "gay.object.typecasting.fabric.FabricTypeCastingModMenu"
+    }]
+  },
+  "mixins": [
+    "typecasting-common.mixins.json",
+    "typecasting-fabric.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "${versions.minecraft}",
+    "fabricloader": ">=${versions.fabric_loader}",
+    "fabric-api": ">=${versions.fabric_api}",
+    "fabric-language-kotlin": ">=${versions.kotlin_fabric}",
+    "architectury": ">=${versions.architectury}",
+    "hexcasting": ">=${versions.hexcasting}",
+    "cloth-config": ">=${versions.clothConfig}"
+  },
+  "suggests": {
+    "modmenu": ">=${versions.modMenu}"
+  }
+}

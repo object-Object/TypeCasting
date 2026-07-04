@@ -1,0 +1,21 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+# https://copier.readthedocs.io/en/stable/updating/#never-change-the-answers-file-manually
+_commit: v2.2.4
+_src_path: gh:FallingColors/hexdummy
+advanced: true
+capitalize_platforms: false
+classname: TypeCasting
+default_branch: main
+description: Hex Casting addon for advanced computation.
+display_name: TypeCasting
+github_repo: TypeCasting
+github_user: object-Object
+homepage_url: https://typecasting.hexxy.media
+java_package: gay.object.typecasting
+kotlin_package: gay.`object`.typecasting
+mappings_name: Mojmap
+minecraft_version_in_mod_version: true
+mit_license: true
+mod_version: 0.1.0
+modid: typecasting
+sources_url: https://github.com/object-Object/TypeCasting

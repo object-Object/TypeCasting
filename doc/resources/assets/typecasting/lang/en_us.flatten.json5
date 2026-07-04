@@ -1,0 +1,8 @@
+{
+  hexdoc: {
+    typecasting: {
+      title: "TypeCasting Book",
+      description: "Hex Casting addon for advanced computation.",
+    },
+  }
+}
