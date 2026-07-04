@@ -7,7 +7,7 @@ capitalize_platforms: false
 classname: TypeCasting
 default_branch: main
 description: Hex Casting addon for advanced computation.
-display_name: TypeCasting
+display_name: Type Casting
 github_repo: TypeCasting
 github_user: object-Object
 homepage_url: https://typecasting.hexxy.media

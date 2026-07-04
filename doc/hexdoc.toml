@@ -24,7 +24,7 @@ include = [
 ]
 
 [template.args]
-mod_name = "TypeCasting"
+mod_name = "Type Casting"
 author = "object-Object"
 show_landing_text = false
 

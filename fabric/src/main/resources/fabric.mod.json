@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "typecasting",
   "version": "${version}",
-  "name": "TypeCasting",
+  "name": "Type Casting",
   "description": "Hex Casting addon for advanced computation.",
   "authors": [
     "object-Object"

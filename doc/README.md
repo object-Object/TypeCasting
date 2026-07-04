@@ -1,6 +1,6 @@
 # hexdoc-typecasting
 
-Python web book docgen and [hexdoc](https://pypi.org/project/hexdoc) plugin for TypeCasting.
+Python web book docgen and [hexdoc](https://pypi.org/project/hexdoc) plugin for Type Casting.
 
 Hex Casting addon for advanced computation.
 

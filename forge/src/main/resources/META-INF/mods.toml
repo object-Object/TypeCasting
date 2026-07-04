@@ -5,7 +5,7 @@ license = "MIT"
 [[mods]]
 modId = "typecasting"
 version = "${version}"
-displayName = "TypeCasting"
+displayName = "Type Casting"
 logoFile = "assets/typecasting/icon.png"
 authors = "object-Object"
 description = "Hex Casting addon for advanced computation."

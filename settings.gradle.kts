@@ -10,5 +10,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "TypeCasting"
+rootProject.name = "Type Casting"
 include("common", "fabric", "forge")

@@ -41,7 +41,7 @@
     },
 
     "autoconfig.typecasting": {
-      title: "TypeCasting Config",
+      title: "Type Casting Config",
 
       category: {
         client: "Client",
