@@ -18,6 +18,11 @@
         },
       },
     },
+
+    "mishap.typecasting": {
+      invalid_subroutine_pattern: "The pattern %s cannot be compiled into a subroutine",
+      subroutine_size: "Exceeded the size limit of a subroutine iota",
+    },
   },
 
   text: {
@@ -34,6 +39,15 @@
         },
 
         server: {
+          maxSubroutineSize: {
+            "": "Max Subroutine Size",
+            "@Tooltip": "Maximum number of patterns allowed in a subroutine iota",
+          },
+
+          discountSubroutineOps: {
+            "": "Discount Subroutine Ops",
+            "@Tooltip": "Whether subroutines should only cost 1 op to execute",
+          },
         },
       },
     },

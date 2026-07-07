@@ -1,6 +1,8 @@
 package gay.`object`.typecasting.config
 
 import dev.architectury.event.events.common.PlayerEvent
+import gay.`object`.typecasting.TypeCasting
+import gay.`object`.typecasting.networking.msg.MsgSyncConfigS2C
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.ConfigHolder
@@ -13,8 +15,6 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer.GlobalData
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.InteractionResult
-import gay.`object`.typecasting.TypeCasting
-import gay.`object`.typecasting.networking.msg.MsgSyncConfigS2C
 
 object TypeCastingServerConfig {
     @JvmStatic
@@ -55,10 +55,22 @@ object TypeCastingServerConfig {
 
     @Config(name = "server")
     class ServerConfig : ConfigData {
+        @Tooltip
+        var maxSubroutineSize: Int = 32
+            private set
+
+        @Tooltip
+        var discountSubroutineOps: Boolean = true
+            private set
+
         fun encode(buf: FriendlyByteBuf) {
+            buf.writeInt(maxSubroutineSize)
+            buf.writeBoolean(discountSubroutineOps)
         }
 
         fun decode(buf: FriendlyByteBuf): ServerConfig {
+            maxSubroutineSize = buf.readInt()
+            discountSubroutineOps = buf.readBoolean()
             return this
         }
     }
