@@ -17,6 +17,7 @@ import at.petrak.hexcasting.api.casting.eval.vm.CastingVM
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.api.casting.iota.PatternIota
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.casting.mishaps.*
 import at.petrak.hexcasting.api.mod.HexTags
@@ -127,7 +128,11 @@ class SubroutineIota(patterns: List<HexPattern>) : Iota(TYPE, patterns) {
 
             override fun display(tag: Tag) =
                 "typecasting.tooltip.subroutine_contents"
-                    .asTranslatedComponent(mapTag(tag, ::getDisplay))
+                    .asTranslatedComponent(
+                        mapTag(tag) { PatternIota.display(HexPattern.fromNBT(it)) }
+                            .reduceOrNull { acc, next -> acc.copy().append(next) }
+                            ?: Component.empty()
+                    )
                     .red
 
             override fun color() = 0xff_b9005d.toInt()
