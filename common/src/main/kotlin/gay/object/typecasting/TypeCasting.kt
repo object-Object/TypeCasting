@@ -1,11 +1,12 @@
 package gay.`object`.typecasting
 
-import net.minecraft.resources.ResourceLocation
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 import gay.`object`.typecasting.config.TypeCastingServerConfig
 import gay.`object`.typecasting.networking.TypeCastingNetworking
 import gay.`object`.typecasting.registry.TypeCastingActions
+import gay.`object`.typecasting.registry.TypeCastingIotaTypes
+import net.minecraft.resources.ResourceLocation
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 object TypeCasting {
     const val MODID = "typecasting"
@@ -20,6 +21,7 @@ object TypeCasting {
         TypeCastingServerConfig.init()
         initRegistries(
             TypeCastingActions,
+            TypeCastingIotaTypes,
         )
         TypeCastingNetworking.init()
     }

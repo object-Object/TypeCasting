@@ -19,6 +19,7 @@ import at.petrak.hexcasting.api.mod.HexTags
 import at.petrak.hexcasting.api.utils.asTranslatedComponent
 import at.petrak.hexcasting.api.utils.downcast
 import at.petrak.hexcasting.api.utils.isOfTag
+import at.petrak.hexcasting.api.utils.red
 import at.petrak.hexcasting.common.casting.PatternRegistryManifest
 import at.petrak.hexcasting.common.lib.hex.HexActions
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
@@ -124,7 +125,9 @@ class SubroutineIota(patterns: List<HexPattern>) : Iota(TYPE, patterns) {
                 SubroutineIota(mapTag(tag, HexPattern::fromNBT))
 
             override fun display(tag: Tag) =
-                "typecasting.tooltip.subroutine_contents".asTranslatedComponent(mapTag(tag, ::getDisplay))
+                "typecasting.tooltip.subroutine_contents"
+                    .asTranslatedComponent(mapTag(tag, ::getDisplay))
+                    .red
 
             override fun color() = 0xff_b9005d.toInt()
 

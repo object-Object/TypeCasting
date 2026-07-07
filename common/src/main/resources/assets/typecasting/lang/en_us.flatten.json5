@@ -6,11 +6,16 @@
         },
       },
     },
+
+    tooltip: {
+      subroutine_contents: "{{%s}}",
+    },
   },
 
   hexcasting: {
     action: {
       "typecasting:": {
+        compile_subroutine: "Compile Subroutine",
       },
 
       book: {
@@ -19,9 +24,14 @@
       },
     },
 
-    "mishap.typecasting": {
-      invalid_subroutine_pattern: "The pattern %s cannot be compiled into a subroutine",
-      subroutine_size: "Exceeded the size limit of a subroutine iota",
+    mishap: {
+      typecasting: {
+        invalid_subroutine_pattern: "The pattern %s cannot be compiled into a subroutine",
+        subroutine_size: "Exceeded the size limit of a subroutine iota",
+      },
+      "invalid_value.typecasting": {
+        pattern_list: "a list of patterns",
+      },
     },
   },
 
