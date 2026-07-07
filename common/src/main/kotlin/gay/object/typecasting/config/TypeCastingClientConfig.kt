@@ -52,8 +52,5 @@ object TypeCastingClientConfig {
     }
 
     @Config(name = "client")
-    class ClientConfig : ConfigData {
-        @Tooltip
-        val dummyClientConfigOption: Boolean = true
-    }
+    class ClientConfig : ConfigData
 }

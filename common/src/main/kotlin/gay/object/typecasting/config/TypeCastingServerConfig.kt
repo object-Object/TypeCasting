@@ -55,16 +55,10 @@ object TypeCastingServerConfig {
 
     @Config(name = "server")
     class ServerConfig : ConfigData {
-        @Tooltip
-        var dummyServerConfigOption: Int = 64
-            private set
-
         fun encode(buf: FriendlyByteBuf) {
-            buf.writeInt(dummyServerConfigOption)
         }
 
         fun decode(buf: FriendlyByteBuf): ServerConfig {
-            dummyServerConfigOption = buf.readInt()
             return this
         }
     }

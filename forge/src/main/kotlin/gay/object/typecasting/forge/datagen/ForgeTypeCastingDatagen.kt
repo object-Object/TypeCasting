@@ -1,7 +1,6 @@
 package gay.`object`.typecasting.forge.datagen
 
 import at.petrak.hexcasting.forge.datagen.TagsProviderEFHSetter
-import gay.`object`.typecasting.datagen.TypeCastingActionTags
 import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
 import net.minecraftforge.data.event.GatherDataEvent
@@ -16,7 +15,7 @@ object ForgeTypeCastingDatagen {
 
             // Forge-only datagen
             if (System.getProperty("typecasting.forge-datagen") == "true") {
-                addVanillaProvider(includeServer()) { TypeCastingActionTags(it, lookupProvider) }
+                // TODO: add datagen providers
             }
         }
     }
