@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "MixinArithmeticEngine",
     "MixinDatagenMain"
   ],
   "plugin": "gay.object.typecasting.mixin.TypeCastingMixinConfigPlugin",

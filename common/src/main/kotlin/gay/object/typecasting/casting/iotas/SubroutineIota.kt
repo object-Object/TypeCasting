@@ -3,12 +3,16 @@ package gay.`object`.typecasting.casting.iotas
 import at.petrak.hexcasting.api.HexAPI
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry
 import at.petrak.hexcasting.api.casting.PatternShapeMatch
+import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction.CostMediaActionResult
+import at.petrak.hexcasting.api.casting.castables.OperationAction
 import at.petrak.hexcasting.api.casting.eval.CastResult
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
 import at.petrak.hexcasting.api.casting.eval.vm.CastingVM
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
 import at.petrak.hexcasting.api.casting.iota.Iota
@@ -22,10 +26,12 @@ import at.petrak.hexcasting.api.utils.isOfTag
 import at.petrak.hexcasting.api.utils.red
 import at.petrak.hexcasting.common.casting.PatternRegistryManifest
 import at.petrak.hexcasting.common.lib.hex.HexActions
+import at.petrak.hexcasting.common.lib.hex.HexArithmetics
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import gay.`object`.typecasting.casting.mishaps.MishapInvalidSubroutinePattern
 import gay.`object`.typecasting.casting.mishaps.MishapSubroutineSize
 import gay.`object`.typecasting.config.TypeCastingServerConfig
+import gay.`object`.typecasting.mixinsupport.mixin
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.Tag
@@ -62,12 +68,7 @@ class SubroutineIota(patterns: List<HexPattern>) : Iota(TYPE, patterns) {
 
             for ((pattern, action, getName) in subroutine.patterns) {
                 try {
-                    if (action.argc > stack.size) {
-                        throw MishapNotEnoughArgs(action.argc, stack.size)
-                    }
-                    val args = stack.takeLast(action.argc)
-                    repeat(action.argc) { stack.removeLast() }
-                    val result = action.executeWithOpCount(args, vm.env)
+                    val result = action.execute(stack, vm.env)
                     stack.addAll(result.resultStack)
 
                     // If some addon makes their pattern cost more than 1 op, only discount it by 1
@@ -181,12 +182,57 @@ data class CompiledSubroutine(val patterns: List<CompiledPattern>) {
 
 data class CompiledPattern(
     val pattern: HexPattern,
-    val action: ConstMediaAction,
+    val action: SubroutineAction,
     val getName: () -> Component?,
 ) {
     constructor(pattern: HexPattern, action: Action, getName: () -> Component?) : this(
         pattern = pattern,
-        action = action as? ConstMediaAction ?: throw MishapInvalidSubroutinePattern(pattern),
+        action = when (action) {
+            is ConstMediaAction -> SubroutineConstMediaAction(action)
+            is OperationAction -> SubroutineOperationAction(pattern, action)
+            else -> throw MishapInvalidSubroutinePattern(pattern)
+        },
         getName = getName,
     )
+}
+
+sealed interface SubroutineAction {
+    val mediaCost: Long
+
+    fun execute(stack: MutableList<Iota>, env: CastingEnvironment): CostMediaActionResult
+}
+
+data class SubroutineConstMediaAction(val action: ConstMediaAction) : SubroutineAction {
+    override val mediaCost by action::mediaCost
+
+    override fun execute(stack: MutableList<Iota>, env: CastingEnvironment): CostMediaActionResult {
+        if (action.argc > stack.size) {
+            throw MishapNotEnoughArgs(action.argc, stack.size)
+        }
+        val args = stack.takeLast(action.argc)
+        repeat(action.argc) { stack.removeLast() }
+        return action.executeWithOpCount(args, env)
+    }
+}
+
+data class SubroutineOperationAction(
+    val pattern: HexPattern,
+    val action: OperationAction,
+) : SubroutineAction {
+    override val mediaCost = 0L
+
+    override fun execute(stack: MutableList<Iota>, env: CastingEnvironment): CostMediaActionResult {
+        // sure would be nice if we could do this at compile time, but alas
+        val op = HexArithmetics.getEngine().mixin.`typecasting$resolveOperator`(
+            pattern, env, CastingImage().copy(stack = stack), SpellContinuation.Done
+        )
+        if (op !is OperatorBasic) {
+            throw MishapInvalidSubroutinePattern(pattern)
+        }
+
+        val args = stack.takeLast(op.arity)
+        repeat(op.arity) { stack.removeLast() }
+
+        return CostMediaActionResult(op.apply(args, env).toList())
+    }
 }
