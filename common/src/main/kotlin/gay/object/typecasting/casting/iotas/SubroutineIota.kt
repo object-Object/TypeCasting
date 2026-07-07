@@ -3,6 +3,7 @@ package gay.`object`.typecasting.casting.iotas
 import at.petrak.hexcasting.api.HexAPI
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry
 import at.petrak.hexcasting.api.casting.PatternShapeMatch
+import at.petrak.hexcasting.api.casting.arithmetic.engine.NoOperatorCandidatesException
 import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
@@ -228,16 +229,19 @@ data class SubroutineOperationAction(
 
     override fun execute(stack: MutableList<Iota>, env: CastingEnvironment): CostMediaActionResult {
         // sure would be nice if we could do this at compile time, but alas
-        val op = HexArithmetics.getEngine().mixin.`typecasting$resolveOperator`(
-            pattern, env, CastingImage().copy(stack = stack), SpellContinuation.Done
-        )
+        val op = try {
+            HexArithmetics.getEngine().mixin.`typecasting$resolveOperator`(
+                pattern, env, CastingImage().copy(stack = stack), SpellContinuation.Done
+            )
+        } catch (e: NoOperatorCandidatesException) {
+            throw MishapInvalidOperatorArgs(e.args)
+        }
         if (op !is OperatorBasic) {
             throw MishapInvalidSubroutinePattern(pattern)
         }
 
         val args = stack.takeLast(op.arity)
         repeat(op.arity) { stack.removeLast() }
-
         return CostMediaActionResult(op.apply(args, env).toList())
     }
 }
