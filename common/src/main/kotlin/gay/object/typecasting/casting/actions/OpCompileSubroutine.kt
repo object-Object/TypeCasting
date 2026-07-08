@@ -10,7 +10,7 @@ import gay.`object`.typecasting.casting.iotas.SubroutineIota
 
 object OpCompileSubroutine : ConstMediaAction {
     override val argc = 1
-    override val mediaCost get() = 10 * MediaConstants.CRYSTAL_UNIT
+    override val mediaCost get() = 5 * MediaConstants.CRYSTAL_UNIT
 
     override fun executeWithOpCount(args: List<Iota>, env: CastingEnvironment): CostMediaActionResult {
         val list = args.getPatternList(0, argc)

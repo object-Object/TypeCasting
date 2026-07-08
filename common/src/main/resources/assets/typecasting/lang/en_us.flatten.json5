@@ -3,6 +3,10 @@
     book: {
       patterns: {
         spells: {
+          subroutines: {
+            "": "Machinations",
+            compile_subroutine: "Remove a list of patterns from the stack, then use them to create a $(thing)machination/$. Costs about five $(l:items/amethyst)$(item)Charged Amethyst/$.",
+          },
         },
       },
     },
@@ -15,7 +19,7 @@
   hexcasting: {
     action: {
       "typecasting:": {
-        compile_subroutine: "Compile Subroutine",
+        compile_subroutine: "Machinate",
       },
 
       book: {
@@ -24,10 +28,19 @@
       },
     },
 
+    iota: {
+      "typecasting:": {
+        subroutine: {
+          "": "Machination",
+          desc: "a machination",
+        },
+      },
+    },
+
     mishap: {
       typecasting: {
-        invalid_subroutine_pattern: "The pattern %s cannot be compiled into a subroutine",
-        subroutine_size: "Exceeded the size limit of a subroutine iota",
+        invalid_subroutine_pattern: "The pattern %s cannot be added to a machination",
+        subroutine_size: "Exceeded the size limit of a machination",
       },
       "invalid_value.typecasting": {
         pattern_list: "a list of patterns",
@@ -50,13 +63,13 @@
 
         server: {
           maxSubroutineSize: {
-            "": "Max Subroutine Size",
-            "@Tooltip": "Maximum number of patterns allowed in a subroutine iota",
+            "": "Max Machination Size",
+            "@Tooltip": "Maximum number of patterns allowed in a machination iota",
           },
 
           discountSubroutineOps: {
-            "": "Discount Subroutine Ops",
-            "@Tooltip": "Whether subroutines should only cost 1 op to execute",
+            "": "Discount Machination Ops",
+            "@Tooltip": "Whether machinations should only cost 1 op to execute",
           },
         },
       },

@@ -1,0 +1,16 @@
+{
+  name: "typecasting.book.patterns.spells.subroutines",
+  category: "hexcasting:patterns/spells",
+  icon: "minecraft:anvil",
+  advancement: "hexcasting:root",
+  pages: [
+    {
+      type: "hexcasting:pattern",
+      op_id: "typecasting:compile_subroutine",
+      anchor: "typecasting:compile_subroutine",
+      input: "list",
+      output: "machination",
+      text: "typecasting.book.patterns.spells.subroutines.compile_subroutine",
+    },
+  ],
+}
