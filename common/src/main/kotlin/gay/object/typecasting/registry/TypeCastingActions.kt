@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.HexRegistries
 import at.petrak.hexcasting.common.lib.hex.HexActions
 import gay.`object`.typecasting.casting.actions.OpCompileSubroutine
+import gay.`object`.typecasting.casting.actions.OpSetOpLimitTrap
 
 object TypeCastingActions : TypeCastingRegistrar<ActionRegistryEntry>(
     HexRegistries.ACTION,
@@ -17,6 +18,13 @@ object TypeCastingActions : TypeCastingRegistrar<ActionRegistryEntry>(
         HexDir.EAST,
         "qaedweqaqeqqeqqqeqqeqwaeqeaeqeaeaeqeaeqea",
         OpCompileSubroutine,
+    )
+
+    val SET_OP_LIMIT_TRAP = make(
+        "set_op_limit_trap",
+        HexDir.SOUTH_EAST,
+        "wdwewawqwqw",
+        OpSetOpLimitTrap,
     )
 
     private fun make(name: String, startDir: HexDir, signature: String, action: Action) =

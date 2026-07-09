@@ -7,7 +7,8 @@
   ],
   "mixins": [
     "MixinArithmeticEngine",
-    "MixinDatagenMain"
+    "MixinDatagenMain",
+    "MixinFrameEvaluate"
   ],
   "plugin": "gay.object.typecasting.mixin.TypeCastingMixinConfigPlugin",
   "injectors": {

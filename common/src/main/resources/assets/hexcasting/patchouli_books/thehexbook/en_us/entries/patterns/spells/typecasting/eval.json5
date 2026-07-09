@@ -1,0 +1,16 @@
+{
+  name: "typecasting.book.patterns.eval",
+  category: "hexcasting:patterns",
+  icon: "minecraft:cobweb",
+  advancement: "hexcasting:root",
+  pages: [
+    {
+      type: "hexcasting:pattern",
+      op_id: "typecasting:set_op_limit_trap",
+      anchor: "typecasting:set_op_limit_trap",
+      input: "list, num",
+      output: "",
+      text: "typecasting.book.patterns.eval.set_op_limit_trap",
+    },
+  ],
+}

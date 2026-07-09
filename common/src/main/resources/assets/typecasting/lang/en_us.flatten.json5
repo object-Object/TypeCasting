@@ -2,6 +2,10 @@
   typecasting: {
     book: {
       patterns: {
+        eval: {
+          "": "Computational Meta-Eval",
+          set_op_limit_trap: "Remove a list of patterns and a number from the stack, then, for the rest of this _Hex, cast the given patterns the first time $(l:patterns/meta#hexcasting:thanatos)$(action)Thanatos' Reflection/$ would push a smaller number than the given number."
+        },
         spells: {
           subroutines: {
             "": "Machinations",
@@ -20,6 +24,7 @@
     action: {
       "typecasting:": {
         compile_subroutine: "Machinate",
+        set_op_limit_trap: "Thanatos' Gambit",
       },
 
       book: {
