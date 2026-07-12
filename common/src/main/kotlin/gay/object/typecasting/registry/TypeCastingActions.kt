@@ -20,12 +20,7 @@ object TypeCastingActions : TypeCastingRegistrar<ActionRegistryEntry>(
         OpCompileSubroutine,
     )
 
-    val SET_OP_LIMIT_TRAP = make(
-        "set_op_limit_trap",
-        HexDir.SOUTH_EAST,
-        "wdwewawqwqw",
-        OpSetOpLimitTrap,
-    )
+    val SET_OP_LIMIT_TRAP = make("set_op_limit_trap", HexDir.SOUTH_EAST, "weedqwa", OpSetOpLimitTrap)
 
     private fun make(name: String, startDir: HexDir, signature: String, action: Action) =
         make(name, startDir, signature) { action }
