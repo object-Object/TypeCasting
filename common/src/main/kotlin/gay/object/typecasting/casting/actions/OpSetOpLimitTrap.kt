@@ -5,10 +5,7 @@ import at.petrak.hexcasting.api.casting.castables.Action
 import at.petrak.hexcasting.api.casting.eval.CastResult
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.OperationResult
-import at.petrak.hexcasting.api.casting.eval.vm.CastingImage
-import at.petrak.hexcasting.api.casting.eval.vm.CastingVM
-import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate
-import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation
+import at.petrak.hexcasting.api.casting.eval.vm.*
 import at.petrak.hexcasting.api.casting.getIntBetween
 import at.petrak.hexcasting.api.casting.getList
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
@@ -55,14 +52,17 @@ object OpSetOpLimitTrap : Action {
     }
 
     @JvmStatic
-    fun maybeTriggerOpLimit(vm: CastingVM, level: ServerLevel, result: CastResult): CastResult {
+    fun maybeTriggerOpLimit(vm: CastingVM, result: CastResult): CastResult {
         val image = result.newData ?: return result
+        if (image.escapeNext || image.parenCount > 0) return result
         val opLimit = getOpLimit(image.userData) ?: return result
         if (vm.env.maxOpCount() - image.opsConsumed >= opLimit) return result
 
-        val newCont = getCode(image.userData, level)
-            ?.let { result.continuation.pushFrame(FrameEvaluate(it, isMetacasting = true)) }
-            ?: result.continuation
+        val newCont = getCode(image.userData, vm.env.world)?.let {
+            result.continuation
+                .pushFrame(FrameFinishEval)
+                .pushFrame(FrameEvaluate(it, isMetacasting = true))
+        } ?: result.continuation
 
         image.userData.remove(CODE_TAG)
         image.userData.remove(OP_LIMIT_TAG)
