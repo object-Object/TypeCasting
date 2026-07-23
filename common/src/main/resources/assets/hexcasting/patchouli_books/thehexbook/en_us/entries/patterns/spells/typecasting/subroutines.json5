@@ -12,5 +12,13 @@
       output: "machination",
       text: "typecasting.book.patterns.spells.subroutines.compile_subroutine",
     },
+    {
+      type: "hexcasting:pattern",
+      op_id: "typecasting:decompile_subroutine",
+      anchor: "typecasting:decompile_subroutine",
+      input: "machination",
+      output: "list",
+      text: "typecasting.book.patterns.spells.subroutines.decompile_subroutine",
+    },
   ],
 }

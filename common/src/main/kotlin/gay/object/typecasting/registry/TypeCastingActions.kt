@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.HexRegistries
 import at.petrak.hexcasting.common.lib.hex.HexActions
 import gay.`object`.typecasting.casting.actions.OpCompileSubroutine
+import gay.`object`.typecasting.casting.actions.OpDecompileSubroutine
 import gay.`object`.typecasting.casting.actions.OpSetOpLimitTrap
 
 object TypeCastingActions : TypeCastingRegistrar<ActionRegistryEntry>(
@@ -18,6 +19,13 @@ object TypeCastingActions : TypeCastingRegistrar<ActionRegistryEntry>(
         HexDir.EAST,
         "qaedweqaqeqqeqqqeqqeqwaeqeaeqeaeaeqeaeqea",
         OpCompileSubroutine,
+    )
+
+    val DECOMPILE_SUBROUTINE = make(
+        "decompile_subroutine",
+        HexDir.SOUTH_EAST,
+        "dqeqdqeqdqdqeqdqeqdweqeeqeeeqeeqedeqwaqde",
+        OpDecompileSubroutine,
     )
 
     val SET_OP_LIMIT_TRAP = make("set_op_limit_trap", HexDir.WEST, "weedqwa", OpSetOpLimitTrap)

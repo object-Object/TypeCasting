@@ -57,7 +57,7 @@ class SubroutineIota(patterns: List<HexPattern>) : Iota(TYPE, patterns) {
 
     override fun serialize() = patterns.map { it.serializeToNBT() }.toCollection(ListTag())
 
-    override fun size() = patterns.size + 1
+    override fun size() = patterns.size.coerceAtLeast(1)
 
     override fun executable() = true
 

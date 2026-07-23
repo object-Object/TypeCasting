@@ -10,6 +10,7 @@
           subroutines: {
             "": "Machinations",
             compile_subroutine: "Remove a list of patterns from the stack, then use them to create a $(thing)machination/$. Costs about five $(l:items/amethyst)$(item)Charged Amethyst/$.",
+            decompile_subroutine: "Remove a $(thing)machination/$ from the stack, then convert it back into a list of patterns. Costs about five $(l:items/amethyst)$(item)Charged Amethyst/$.",
           },
         },
       },
@@ -24,6 +25,7 @@
     action: {
       "typecasting:": {
         compile_subroutine: "Machinate",
+        decompile_subroutine: "Decimate",
         set_op_limit_trap: "Thanatos' Gambit",
       },
 
@@ -49,6 +51,7 @@
       },
       "invalid_value.typecasting": {
         pattern_list: "a list of patterns",
+        subroutine: "a machination",
       },
     },
   },
